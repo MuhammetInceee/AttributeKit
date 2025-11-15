@@ -20,6 +20,8 @@
 - [🚀 Installation](#-installation)
 - [📚 Attributes](#-attributes)
   - [🔘 InspectorButton](#-inspectorbutton)
+  - [🔲 InlineButton](#-inlinebutton)
+  - [🔳 InlineButtons](#-inlinebuttons)
   - [⏱️ TimeDecomposer](#️-timedecomposer)
   - [👁️ ConditionalDisplay](#️-conditionaldisplay)
   - [🆔 UniqueId](#-uniqueid)
@@ -35,6 +37,7 @@
 ## ✨ Features
 
 - 🎯 **Inspector Buttons** - Execute methods directly from the Inspector
+- 🔲 **Inline Buttons** - Add buttons next to any field for quick actions
 - ⏰ **Time Decomposition** - Break down time values into readable units
 - 🔍 **Conditional Display** - Show/hide fields based on conditions
 - 🔑 **Unique ID Generation** - Generate and manage unique identifiers
@@ -110,6 +113,127 @@ public class Example : MonoBehaviour
 │ [Generate Level]                 │
 │ [Start Game Sequence]            │
 └─────────────────────────────────┘
+```
+
+---
+
+### 🔲 InlineButton
+
+Add a button next to any field for quick method invocation - perfect for single button actions.
+
+**Features:**
+- ✅ Button next to field
+- ✅ Custom labels and widths
+- ✅ Private method support
+- ✅ Auto dirty marking
+- ✅ Coroutine support
+- ✅ Minimal inspector space
+
+**Usage:**
+```csharp
+using AttributeKit;
+using UnityEngine;
+
+public class Example : MonoBehaviour
+{
+    // Simple reset button
+    [InlineButton("ResetHealth")]
+    public int health = 100;
+
+    // Custom label and width
+    [InlineButton("Randomize", "🎲", 40f)]
+    public int score = 0;
+
+    // With larger button
+    [InlineButton("LoadData", "Load from File", 100f)]
+    public string dataPath = "";
+
+    private void ResetHealth()
+    {
+        health = 100;
+    }
+
+    private void Randomize()
+    {
+        score = Random.Range(0, 1000);
+    }
+
+    private void LoadData()
+    {
+        // Load logic
+    }
+}
+```
+
+**Inspector Preview:**
+```
+Health: [100      ] [Reset Health]
+Score:  [0        ] [🎲]
+Data Path: [     ] [Load from File]
+```
+
+---
+
+### 🔳 InlineButtons
+
+Add **multiple buttons** next to a field using a simple string array syntax - perfect for increment/decrement or multiple actions.
+
+**Features:**
+- ✅ Multiple buttons on one field
+- ✅ Simple string array syntax
+- ✅ Format: `"MethodName|Label|Width"`
+- ✅ Label and width optional
+- ✅ Clean, compact layout
+- ✅ All InlineButton features
+
+**Usage:**
+```csharp
+using AttributeKit;
+using UnityEngine;
+
+public class Example : MonoBehaviour
+{
+    // Simple - method names only
+    [InlineButtons("Double", "Halve", "Clear")]
+    public float value = 10f;
+
+    // With custom labels
+    [InlineButtons("Increment|+", "Decrement|-", "Reset|↻")]
+    public int counter = 0;
+
+    // With labels and widths
+    [InlineButtons("Increment|+|30", "Decrement|-|30", "Reset|Reset|50")]
+    public int score = 0;
+
+    // Methods
+    private void Increment() => counter++;
+    private void Decrement() => counter--;
+    private void Reset() => counter = 0;
+
+    private void Double() => value *= 2;
+    private void Halve() => value /= 2;
+    private void Clear() => value = 0f;
+}
+```
+
+**Inspector Preview:**
+```
+Value:   [10.0    ] [Double] [Halve] [Clear]
+Counter: [0       ] [+] [-] [↻]
+Score:   [0       ] [+] [-] [Reset]
+```
+
+**Comparison:**
+```csharp
+// OLD WAY (complex, causes issues)
+[InlineButton("Inc", "+", 30f)]
+[InlineButton("Dec", "-", 30f)]
+[InlineButton("Reset", "↻", 30f)]
+public int counter = 0;
+
+// NEW WAY (simple, reliable) ✨
+[InlineButtons("Inc|+|30", "Dec|-|30", "Reset|↻|30")]
+public int counter = 0;
 ```
 
 ---
@@ -574,6 +698,12 @@ AttributeKit/
 ├── InspectorButtonAttribute/
 │   ├── InspectorButtonAttribute.cs
 │   └── InspectorButtonAttributeDrawer.cs
+├── InlineButtonAttribute/
+│   ├── InlineButtonAttribute.cs
+│   ├── InlineButtonAttributeDrawer.cs
+│   ├── InlineButtonsAttribute.cs
+│   ├── InlineButtonsAttributeDrawer.cs
+│   └── InlineButtonAttributeExample.cs
 ├── TimeDecomposerAttribute/
 │   ├── TimeDecomposerAttribute.cs
 │   └── TimeDecomposerAttributeDrawer.cs
