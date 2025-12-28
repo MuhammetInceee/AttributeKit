@@ -745,12 +745,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🌟 Credits
-
-Created with ❤️ by [Muhammet Ince](https://github.com/MuhammetInceee)
-
----
-
 ## 📞 Support
 
 If you find this useful, please ⭐ star the repository!
