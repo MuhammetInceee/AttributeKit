@@ -6,7 +6,6 @@
 
 [![Unity](https://img.shields.io/badge/Unity-2020.3+-black.svg?style=flat&logo=unity)](https://unity.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](LICENSE)
-[![Made with Love](https://img.shields.io/badge/Made%20with-♥-red.svg?style=flat)]()
 
 *Transform your Unity Inspector into a powerful, organized, and beautiful interface*
 
